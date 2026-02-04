@@ -1,10 +1,566 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>GitHub Pages 테스트</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hochan Jun - Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141930;
+            --bg-card: #1a1f3a;
+            --text-primary: #e8edf4;
+            --text-secondary: #a0a8c0;
+            --text-muted: #6b7280;
+            --accent-primary: #60a5fa;
+            --accent-secondary: #818cf8;
+            --border: #2d3451;
+            --highlight: rgba(96, 165, 250, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Schibsted Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 6rem 0 4rem;
+            position: relative;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .header-left {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .bio {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: var(--bg-card);
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
+        }
+
+        .contact-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Education */
+        .education-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
+        }
+
+        .education-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .education-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .education-school {
+            font-size: 1rem;
+            color: var(--accent-primary);
+            margin: 0.3rem 0;
+        }
+
+        .education-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: right;
+        }
+
+        .coursework {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .coursework-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .coursework-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .coursework-tag {
+            background: var(--highlight);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(96, 165, 250, 0.2);
+        }
+
+        /* Experience Section */
+        .experience-section {
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .experience-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 24px rgba(96, 165, 250, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 12px 0 0 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .experience-item:hover::before {
+            opacity: 1;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        .experience-meta {
+            text-align: right;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .experience-location {
+            margin-top: 0.2rem;
+        }
+
+        .experience-achievements {
+            list-style: none;
+        }
+
+        .experience-achievements li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .experience-achievements li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+        }
+
+        .metric {
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            header {
+                padding: 4rem 0 3rem;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+
+            .experience-meta {
+                text-align: left;
+            }
+
+            .education-content {
+                grid-template-columns: 1fr;
+            }
+
+            .education-date {
+                text-align: left;
+            }
+
+            .experience-item {
+                padding: 1.8rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+    </style>
 </head>
 <body>
-  <h1>페이지가 열리면 성공입니다 🎉</h1>
+    <div class="grain"></div>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>Hochan Jun</h1>
+                    <div class="subtitle">Software Engineer</div>
+                    <p class="bio">
+                        Data-driven software engineer with expertise in building automated systems, data verification tools, and analytics platforms. Experienced in reducing error rates and delivering production-ready solutions at scale.
+                    </p>
+                    <div class="contact-links">
+                        <a href="mailto:hochanjun01@gmail.com" class="contact-link">
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                            </svg>
+                            Email
+                        </a>
+                        <a href="https://linkedin.com/in/hochan-jun" target="_blank" class="contact-link">
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                        <a href="https://github.com/Hojjan" target="_blank" class="contact-link">
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"/>
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="tel:6313669423" class="contact-link">
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                            </svg>
+                            (631) 366-9423
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="education-section">
+            <h2 class="section-title">Education</h2>
+            <div class="education-content">
+                <div>
+                    <div class="education-title">Bachelor of Science in Computer Science</div>
+                    <div class="education-school">State University of New York - Stony Brook</div>
+                </div>
+                <div class="education-date">
+                    <div>Aug 2020 - May 2026</div>
+                    <div class="education-location">Stony Brook, NY</div>
+                </div>
+            </div>
+            <div class="coursework">
+                <div class="coursework-label">Relevant Coursework</div>
+                <div class="coursework-list">
+                    <span class="coursework-tag">Data Structures</span>
+                    <span class="coursework-tag">Data Science</span>
+                    <span class="coursework-tag">Analysis of Algorithms</span>
+                    <span class="coursework-tag">Software Development</span>
+                    <span class="coursework-tag">Machine Learning</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="experience-section">
+            <h2 class="section-title">Work Experience</h2>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Data Analysis & Operation Assistance Intern</div>
+                        <div class="experience-company">PT Korea</div>
+                    </div>
+                    <div class="experience-meta">
+                        <div>Mar 2025 - Jul 2025</div>
+                        <div class="experience-location">Seoul, Korea</div>
+                    </div>
+                </div>
+                <ul class="experience-achievements">
+                    <li>Tracked crucial error causes from complex datasets to manage <span class="metric">200+ Tableau dashboards</span>. Ensured large-scale data integrity and security through inspection, anomaly resolution, and governance.</li>
+                    <li>Streamlined global data request processes with Jira. Led cross-regional meetings and partnered with international teams to resolve complex technical issues.</li>
+                    <li>Conducted regular reviews and mappings of misaligned product data caused by parsing errors, using spreadsheets and SQL. Addressed client requests by identifying and correcting additional errors in the global dashboard.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Software Engineer Intern</div>
+                        <div class="experience-company">Woojung R&D</div>
+                    </div>
+                    <div class="experience-meta">
+                        <div>Jan 2024 - Feb 2024</div>
+                        <div class="experience-location">Seoul, Korea</div>
+                    </div>
+                </div>
+                <ul class="experience-achievements">
+                    <li>Developed a verifier with Python, SQL, DART API to compare corporate disclosure data between our internal records and third-party securities firms through web scraping, and identifying discrepancies.</li>
+                    <li>Identified errors from the company's data by the verifier - missing values and <span class="metric">13% variances</span> in financial metrics across <span class="metric">8.6%</span> of KOSPI and KOSDAQ <span class="metric">2360 companies</span>, through scraping and comparing them with the code.</li>
+                    <li>Reduced error rates from <span class="metric">8.6% to 0.6%</span> by reverse engineering the calculation methods of other securities firms and applying it to the company, ensuring an accurate data delivery in our partnership with IBK Securities.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Software Engineer Intern</div>
+                        <div class="experience-company">Woojung R&D</div>
+                    </div>
+                    <div class="experience-meta">
+                        <div>Dec 2021 - Feb 2022</div>
+                        <div class="experience-location">Seoul, Korea</div>
+                    </div>
+                </div>
+                <ul class="experience-achievements">
+                    <li>Developed a Python-based automated news generator for the website "GuruWhisper" (<span class="metric">1K DAU</span>) which triggered periodically, and produced reports on GURU's portfolio data.</li>
+                    <li>Identified an error where a company's stock price appeared to be abnormal. Allowed individual investors to view information from Korea's DART filings and the U.S. SEC filings side by side using SEC Edgar, DART API.</li>
+                    <li>Provided the generated news context to KB Securities for the M-able Mini mobile app as KB robo-news service, with <span class="metric">280K MAU</span> as of Aug 2022.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            © 2026 Hochan Jun. Built with attention to detail.
+        </div>
+    </footer>
+
+    <script>
+        // Scroll indicator
+        window.addEventListener('scroll', () => {
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
+            scrollIndicator.style.width = scrollPercent + '%';
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
